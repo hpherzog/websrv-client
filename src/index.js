@@ -3,6 +3,6 @@ var client = require('./client');
 
 var websrv = {};
 
-websrv.client = client;
+websrv.Client = client.Client;
 
 window.websrv = websrv;
