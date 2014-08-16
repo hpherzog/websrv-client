@@ -10,13 +10,19 @@ gulp.task('default', function() {
 
     var wrapTemplate = '(function(){<%= contents %>})();';
 
-    gulp.src('./src/index.js')
+    gulp.src('./index.js')
+        .pipe(browserify())
+        .pipe(uglify())
+        .pipe(wrap(wrapTemplate))
+        .pipe(rename('websrv.min.js'))
+        .pipe(gulp.dest('.'))
+
+    gulp.src('./index.js')
         .pipe(browserify({
             debug: true
         }))
-        //.pipe(uglify())
         .pipe(wrap(wrapTemplate))
-        .pipe(rename('websrv.min.js'))
+        .pipe(rename('websrv.js'))
         .pipe(gulp.dest('.'))
         .pipe(gulp.dest('../websrv/examples/default/public/js'))
 });
